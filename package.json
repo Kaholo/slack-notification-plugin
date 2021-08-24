@@ -1,0 +1,22 @@
+{
+  "name": "slack-notification-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sielakos/slack-notification-plugin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sielakos/slack-notification-plugin/issues"
+  },
+  "homepage": "https://github.com/sielakos/slack-notification-plugin#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}

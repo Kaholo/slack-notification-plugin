@@ -1,0 +1,17 @@
+{
+  "name": "slack-notificator",
+  "type": "notificator",
+  "exposeRoute": false,
+  "execProgram": "node",
+  "main": "index.js",
+  "version": "1.0.0",
+  "description":"Notificator for Slack",
+  "imgUrl": "slack.png",
+  "settings":[
+    {
+      "name":"WEB_HOOK_URL",
+      "viewName": "Web Hook Url",
+      "type":"string"
+    }
+  ]
+}
