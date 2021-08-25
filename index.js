@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-function sendNotification(action, settings) {
+function sendNotification(params, settings) {
   const url = settings.WEB_HOOK_URL;
 
   if (!url) {
@@ -15,11 +15,10 @@ function sendNotification(action, settings) {
     action: kaholoAction, // {name, id}
     message,
     type, // ERROR, FINISHED, STARTED, PENDING etc.
-  } = action.params;
+  } = params;
 
 
-
-  return fetch(webHookUrl, {
+  return fetch(url, {
     method: 'POST',
     body: JSON.stringify({
       text: `KAHOLO NOTIFICTION:
