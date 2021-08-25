@@ -23,7 +23,7 @@ function sendNotification(params, settings) {
     body: JSON.stringify({
       text: `KAHOLO NOTIFICTION:
         Pipeline ${pipeline.name} (${pipeline.id})
-        Start Time: ${startTime.toString().substring(0, 10)})
+        Start Time: ${startTime.toISOString().substring(0, 10)}
         Execution Id: ${executionId},
         type: ${type},
         message: ${message},
