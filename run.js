@@ -8,15 +8,16 @@ const params = {
     id: 'ddd'
   },
   startTime: new Date(), // Date
+  finishTime: new Date((new Date()).getTime() + 500000),
   executionId: `id ${Math.random()}`,
-  process: {
-    name: 'Example process',
-    id: 'ddd'
-  },
-  action: {
-    name: 'Example action',
-    id: 'ddd'
-  },
+  // process: {
+  //   name: 'Example process',
+  //   id: 'ddd'
+  // },
+  // action: {
+  //   name: 'Example action',
+  //   id: 'ddd'
+  // },
   message: 'Test message',
   type: 'ERROR', // ERROR, FINISHED, STARTED, PENDING etc.
 }
