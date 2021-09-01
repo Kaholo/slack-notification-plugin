@@ -59,7 +59,7 @@ function sendNotification(params, settings) {
         Finish Time: ${formatDate(pipeline.finishTime)}
         Execution Id: ${pipeline.executionId},
         Notification level: ${pipeline.notificationsLevel},
-        message: ${actions.map((action) => {
+        message: ${actions.map((action) => (
           `Process: ${action.processName}
             Action: ${action.mandatory ? "mandatory, " : ""} status: ${action.status}
               started: ${formatDate(action.startTime)}, finished: ${formatDate(action.finishTime)}
@@ -67,7 +67,7 @@ function sendNotification(params, settings) {
 
               Result: ${action.result}
           `
-        }).join("\n")},
+        )).join("\n")},
       `
     })
   });
