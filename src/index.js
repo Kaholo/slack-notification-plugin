@@ -15,15 +15,35 @@ function sendNotification(params, settings) {
     return Promise.reject("Web hook url must be defined");
   }
 
+  // Expected structure, defined as followed:
+  // {
+  //   actions: [{
+  //       processName,
+  //       mandatory,
+  //       pluginName,
+  //       pluginVersion,
+  //       result,
+  //       status,
+  //       startTime,
+  //       finishTime
+  //   }]
+  //   pipeline: {
+  //       id,
+  //       executionId,
+  //       name,
+  //       agentName,
+  //       notificationsLevel,
+  //       status,
+  //       reason,
+  //       trigger,
+  //       startTime,
+  //       finishTime
+  //   }
+  // }
+
   const {
-    pipeline, // {name, id}
-    startTime, // Date
-    finishTime, // Date
-    executionId,
-    process, // {name, id}
-    action, // {name, id}
-    message,
-    type, // ERROR, FINISHED, STARTED, PENDING etc.
+    pipeline,
+    actions
   } = params;
 
 
@@ -32,13 +52,23 @@ function sendNotification(params, settings) {
     body: JSON.stringify({
       text: `KAHOLO NOTIFICTION:
         Pipeline: ${pipeline.name} (${pipeline.id})
-        Start Time: ${formatDate(startTime)}
-        Finish Time: ${formatDate(finishTime)}
-        Execution Id: ${executionId},
-        type: ${type},
-        message: ${message},
-        process: ${process?.name} (${process?.id})
-        action: ${action?.name} (${action?.id})
+        Agent: ${pipeline.agentName}
+        Status: ${pipeline.status}
+        Trigger: ${pipeline.trigger}
+        Reason: ${pipeline.reason}
+        Start Time: ${formatDate(pipeline.startTime)}
+        Finish Time: ${formatDate(pipeline.finishTime)}
+        Execution Id: ${pipeline.executionId},
+        Notification level: ${pipeline.notificationsLevel},
+        message: ${actions.map((action) => (
+          `Process: ${action.processName}
+            Action: ${action.mandatory ? "mandatory, " : ""} status: ${action.status}
+              started: ${formatDate(action.startTime)}, finished: ${formatDate(action.finishTime)}
+              plugin: ${action.pluginName}, version: ${action.pluginVersion}
+
+              Result: ${action.result}
+          `
+        )).join("\n")},
       `
     })
   });
