@@ -53,6 +53,7 @@ function sendNotification(params, settings) {
       text: `KAHOLO NOTIFICTION:
         Pipeline: ${pipeline.name} (${pipeline.id})
         Agent: ${pipeline.agentName}
+        Status: ${pipeline.status}
         Trigger: ${pipeline.trigger}
         Reason: ${pipeline.reason}
         Start Time: ${formatDate(pipeline.startTime)}
