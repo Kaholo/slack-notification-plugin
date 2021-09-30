@@ -1,11 +1,11 @@
 {
-  "name": "slack-notificator",
+  "name": "CI-Slack-Notificator",
   "type": "notificator",
   "exposeRoute": false,
   "execProgram": "node",
   "main": "index.js",
-  "version": "1.0.0",
-  "description":"Notificator for Slack",
+  "version": "1.0.2",
+  "description":"Notificator for Slack CI",
   "imgUrl": "slack.png",
   "settings":[
     {

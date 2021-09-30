@@ -1,13 +1,5 @@
 const fetch = require('node-fetch');
 
-function formatDate(date) {
-  if (!date) {
-    return '';
-  }
-
-  return `${date.toISOString().substring(0, 10)} ${date.toISOString().substring(11,16)}`;
-}
-
 function sendNotification(params, settings) {
   const url = settings.WEB_HOOK_URL;
 
@@ -43,33 +35,24 @@ function sendNotification(params, settings) {
 
   const {
     pipeline,
-    actions
+    isAnyError
   } = params;
 
 
   return fetch(url, {
     method: 'POST',
     body: JSON.stringify({
-      text: `KAHOLO NOTIFICTION:
-        Pipeline: ${pipeline.name} (${pipeline.id})
-        Agent: ${pipeline.agentName}
-        Status: ${pipeline.status}
-        Trigger: ${pipeline.trigger}
-        Reason: ${pipeline.reason}
-        Start Time: ${formatDate(pipeline.startTime)}
-        Finish Time: ${formatDate(pipeline.finishTime)}
-        Execution Id: ${pipeline.executionId},
-        Notification level: ${pipeline.notificationsLevel},
-        message: ${actions.map((action) => (
-          `Process: ${action.processName}
-            Action: ${action.mandatory ? "mandatory, " : ""} status: ${action.status}
-              started: ${formatDate(action.startTime)}, finished: ${formatDate(action.finishTime)}
-              plugin: ${action.pluginName}, version: ${action.pluginVersion}
-
-              Result: ${action.result}
-          `
-        )).join("\n")},
-      `
+      attachments: [
+        {
+          fallback: `Kaholo CI job ${pipeline.name} ${isAnyError ? "failed" : "succeeded"}`,
+          color: isAnyError ? "#d20000" : "#98cd68",
+          pretext: `Kaholo CI job ${isAnyError ? "failed" : "succeeded"}`,
+          title: pipeline.name,
+          title_link: `http://ci.kaholo.io/maps/${pipeline.id}/results/${pipeline.executionId}`,
+          footer: "Kaholo CI",
+          ts: new Date().getTime(),
+        }
+      ]
     })
   });
 }

@@ -1,6 +1,6 @@
 {
-  "name": "slack-notification-plugin",
-  "version": "1.0.0",
+  "name": "ci-slack-notificator",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
